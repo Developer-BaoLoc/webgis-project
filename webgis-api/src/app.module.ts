@@ -1,23 +1,38 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+
 import { WardsModule } from './wards/wards.module';
 import { RoadsModule } from './roads/roads.module';
 import { RiversModule } from './rivers/rivers.module';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'tobaoloc5a4gmail.com',
-      database: 'webgis',
+
+      host: process.env.DB_HOST,
+
+      port: Number(process.env.DB_PORT),
+
+      username: process.env.DB_USER,
+
+      password: process.env.DB_PASSWORD,
+
+      database: process.env.DB_NAME,
+
       synchronize: false,
+
       autoLoadEntities: true,
     }),
+
     WardsModule,
     RoadsModule,
     RiversModule,
   ],
 })
-export class AppModule {}
+export class AppModule { }

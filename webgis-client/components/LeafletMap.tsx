@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { api } from '@/lib/api';
 import L from 'leaflet';
 import { useMap } from 'react-leaflet';
 import {
@@ -105,9 +106,9 @@ export default function LeafletMap() {
 
     useEffect(() => {
         Promise.all([
-            fetch('http://localhost:3000/wards').then((r) => r.json()),
-            fetch('http://localhost:3000/roads').then((r) => r.json()),
-            fetch('http://localhost:3000/rivers').then((r) => r.json()),
+            fetch(api.wards).then((r) => r.json()),
+            fetch(api.roads).then((r) => r.json()),
+            fetch(api.rivers).then((r) => r.json()),
         ]).then(([wardsData, roadsData, riversData]) => {
             setWards(wardsData);
             setRoads(roadsData);
@@ -127,7 +128,7 @@ export default function LeafletMap() {
 
                 try {
                     const res = await fetch(
-                        `http://localhost:3000/wards/current?lat=${lat}&lng=${lng}`
+                        api.currentWard(lat, lng)
                     );
 
                     const data = await res.json();
