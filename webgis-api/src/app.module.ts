@@ -2,9 +2,9 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { WardsModule } from './wards/wards.module';
-import { RoadsModule } from './roads/roads.module';
-import { RiversModule } from './rivers/rivers.module';
+import { WardsModule } from './modules/wards/wards.module';
+import { RoadsModule } from './modules/roads/roads.module';
+import { RiversModule } from './modules/rivers/rivers.module';
 
 @Module({
   imports: [
