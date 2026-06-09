@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# WebGIS Client
 
-## Getting Started
+Next.js frontend that renders an interactive Leaflet map with ward, road, and river layers. Authentication is required to access the map.
 
-First, run the development server:
+## Modules
+
+| Module | Path | README |
+|--------|------|--------|
+| Routes | `app/` | [README](app/README.md) |
+| Auth UI | `components/auth/` | [README](components/auth/README.md) |
+| Map | `components/map/` | [README](components/map/README.md) |
+| Auth state | `context/` | [README](context/README.md) |
+| API URLs | `lib/` | [README](lib/README.md) |
+
+Top-level map shell: `components/Map.tsx` (dynamic import of `LeafletMap.tsx` with SSR disabled).
+
+## Environment variables
+
+| Variable | Description |
+|----------|-------------|
+| `NEXT_PUBLIC_API_URL` | Backend base URL (e.g. `http://localhost:3001`) |
+
+## Setup
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev    # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## User flow
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Unauthenticated visitors are redirected to `/login`.
+2. After login, the JWT is stored in `localStorage` as `accessToken`.
+3. The home page (`/`) renders the map inside `ProtectedRoute`.
+4. `AuthProvider` (in root layout) validates the token via `GET /users/me` on load.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Key dependencies
 
-## Learn More
+- `react-leaflet` / `leaflet` — map rendering
+- Next.js App Router — routing and layout
 
-To learn more about Next.js, take a look at the following resources:
+## Related docs
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Backend API: [docs/api.md](../docs/api.md)
+- Architecture: [docs/architecture.md](../docs/architecture.md)
