@@ -53,3 +53,16 @@ Full endpoint list: [docs/api.md](../docs/api.md).
 GIS modules (`wards`, `roads`, `rivers`) use raw SQL via TypeORM `DataSource` with PostGIS functions (`ST_AsGeoJSON`, `ST_Transform`, `ST_Contains`). Geometries are stored in EPSG:3857 and returned to clients as EPSG:4326 GeoJSON.
 
 The `users` module uses TypeORM entities and repositories.
+
+## Seed system
+
+To reset demo data:
+
+```bash
+npm run seed
+```
+
+Seed will:
+- create admin user
+- create normal user
+- skip duplicates automatically
