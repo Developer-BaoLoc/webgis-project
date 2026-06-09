@@ -3,6 +3,11 @@ import { useEffect, useState } from 'react';
 export default function useWardSearch(
   wards: any,
 ) {
+    const clearSearch = () => {
+      setSearchText('');
+      setSuggestions([]);
+  };
+
   const [searchText, setSearchText] =
     useState('');
 
@@ -34,5 +39,6 @@ export default function useWardSearch(
     setSearchText,
     suggestions,
     setSuggestions,
+    clearSearch,
   };
 }

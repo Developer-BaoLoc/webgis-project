@@ -45,6 +45,7 @@ export default function LeafletMap() {
     setSearchText,
     suggestions,
     setSuggestions,
+    clearSearch,
   } = useWardSearch(wards);
 
   const {
@@ -67,7 +68,7 @@ export default function LeafletMap() {
         searchText={searchText}
         setSearchText={setSearchText}
         suggestions={suggestions}
-        onSelect={zoomToWard}
+        onSelect={(feature) => zoomToWard(feature, clearSearch)}
       />
 
       <MapContainer

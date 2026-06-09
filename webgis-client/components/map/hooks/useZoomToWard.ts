@@ -26,7 +26,7 @@ export default function useZoomToWard(
       feature.properties.osm_id,
     );
 
-    clearSearch();
+    clearSearch?.();
 
     mapRef.current?.fitBounds(
       layer.getBounds(),
